@@ -1,0 +1,13 @@
+{
+  "type": "mssql",
+  "host": "TI-04",
+  "port": 1433,
+  "username": "sa",
+  "password": "vFgcmK8n",
+  "database": "gobarber",
+  "entities": ["./src/models/*.ts"],
+  "migrations": ["./src/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
+}
