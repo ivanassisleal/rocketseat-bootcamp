@@ -9,19 +9,20 @@ export class createUsers1590685102368 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "varchar",
+                        type: "uniqueidentifier",
                         isPrimary: true,
                         generationStrategy: "uuid",
                         default: "NEWID()",
                     },
                     {
-                        name: "nome",
+                        name: "name",
                         type: "varchar",
                         isNullable: false,
                     },
                     {
                         name: "email",
                         type: "varchar",
+                        isUnique: true,
                         isNullable: false,
                     },
                     {
