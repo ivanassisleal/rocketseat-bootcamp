@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+	  "name":"mobile",
+      "path": "mobile"
+    },
+	{
+	  "name":"server",
+      "path": "nodejs"
+    }
+  ],
+  "settings": {}
+}
