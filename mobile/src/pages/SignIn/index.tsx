@@ -1,24 +1,77 @@
-import React from "react";
-import { Image } from "react-native";
+import React, { useCallback, useRef } from "react";
+import { Image, KeyboardAvoidingView, Platform, View } from "react-native";
+import Icon from "react-native-vector-icons/Feather";
+
+import { Form } from "@unform/mobile";
+import { FormHandles } from "@unform/core";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
 import logoImg from "../../assets/logo.png";
 
-import { Container, Title } from "./styles";
+import {
+  Container,
+  Title,
+  ForgotPasword,
+  ForgotPaswordText,
+  CreateAccountButton,
+  CreateAccountButtonText,
+} from "./styles";
+import { ScrollView } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 const SignIn: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+  const navigation = useNavigation();
+
+  const handleSignIn = useCallback((data: object) => {
+    console.log(data);
+  }, []);
+
   return (
-    <Container>
-      <Image source={logoImg} />
-      <Title>Faça seu logon</Title>
+    <>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        enabled
+      >
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ flex: 1 }}
+        >
+          <Container>
+            <Image source={logoImg} />
 
-      <Input name="email" icon="mail" placeholder="E-mail" />
-      <Input name="password" icon="lock" placeholder="Password" />
+            <View>
+              <Title>Faça seu logon</Title>
+            </View>
 
-      <Button>Entrar</Button>
-    </Container>
+            <Form
+              ref={formRef}
+              onSubmit={handleSignIn}
+              style={{ width: "100%" }}
+            >
+              <Input name="email" icon="mail" placeholder="E-mail" />
+
+              <Input name="password" icon="lock" placeholder="Password" />
+
+              <Button onPress={() => formRef.current?.submitForm()}>
+                Entrar
+              </Button>
+            </Form>
+
+            <ForgotPasword onPress={() => console.log("Hello")}>
+              <ForgotPaswordText>Esqueci minha Senha</ForgotPaswordText>
+            </ForgotPasword>
+          </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
+      <CreateAccountButton onPress={() => navigation.navigate("SignUp")}>
+        <Icon name="log-in" size={20} color="#ff9000" />
+        <CreateAccountButtonText>Criar uma Conta</CreateAccountButtonText>
+      </CreateAccountButton>
+    </>
   );
 };
 
