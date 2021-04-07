@@ -4,7 +4,7 @@
   "port": 1433,
   "username": "sa",
   "password": "vFgcmK8n",
-  "database": "gobarber",
+  "database": "dev-gobarber",
   "entities": ["./src/models/*.ts"],
   "migrations": ["./src/database/migrations/*.ts"],
   "cli": {
